@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+
+  liquibase:
+    enabled: true
+    drop-first: true
+    change-log: classpath:database-employee-changelog.xml
+    default-schema: employee
+    liquibase-schema: employee
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: employee
+    password: employee
+    driverClassName: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+        default_schema: employee
+    open-in-view: false

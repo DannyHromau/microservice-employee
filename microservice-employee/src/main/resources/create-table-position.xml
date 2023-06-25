@@ -23,6 +23,9 @@
             <column name="fulltime" type="boolean">
                 <constraints nullable="false"/>
             </column>
+            <column name="update_on" type="timestamp with time zone">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
     <!-- END TABLES -->

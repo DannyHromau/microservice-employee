@@ -7,6 +7,6 @@
 
     <property name="schema" value="auth"/>
 
-    <include file="db/changelog-v1.0-cumulative.xml" relativeToChangelogFile="true"/>
+    <include file="changelog-v1.0-cumulative.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

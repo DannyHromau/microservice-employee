@@ -1,5 +1,6 @@
 package com.dannyhromau.employee.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,8 @@ public class Employee {
     private String firstName;
     @Column(name = "last_name", unique = true)
     private String lastName;
+    @Column(name = "position_id", unique = true)
+    private UUID positionId;
     @Column(name = "birth_date", unique = true)
     private LocalDate birthDate;
     @Column(name = "phone", unique = true)
@@ -37,6 +40,7 @@ public class Employee {
     private boolean isFired;
     @Column(name = "fired_on", unique = true)
     private ZonedDateTime firedOn;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", insertable = false, updatable = false)
     private Position position;

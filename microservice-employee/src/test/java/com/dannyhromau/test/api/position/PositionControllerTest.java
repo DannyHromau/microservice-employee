@@ -4,11 +4,11 @@ import com.dannyhromau.employee.Application;
 import com.dannyhromau.employee.api.dto.PositionDto;
 import com.dannyhromau.employee.api.dto.UserDto;
 import com.dannyhromau.employee.controller.AuthController;
-import com.dannyhromau.employee.facade.impl.AuthFacadeImpl;
+import com.dannyhromau.employee.facade.AuthFacade;
 import com.dannyhromau.employee.model.Position;
 import com.dannyhromau.employee.repository.PositionRepository;
 import com.dannyhromau.employee.repository.UserRepository;
-import com.dannyhromau.employee.service.impl.PositionServiceImpl;
+import com.dannyhromau.employee.service.PositionService;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
@@ -36,13 +36,13 @@ public class PositionControllerTest {
     @Autowired
     private AuthController authController;
     @Autowired
-    private AuthFacadeImpl authFacadeImpl;
+    private AuthFacade authFacade;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private PositionRepository positionRepository;
     @Autowired
-    private PositionServiceImpl positionServiceImpl;
+    private PositionService positionService;
     @Value("${host}")
     private String host;
     @Value("${positionMapping}")
@@ -55,7 +55,7 @@ public class PositionControllerTest {
         userDto.setUsername("user");
         userDto.setEmail("user@user.com");
         userDto.setPassword("11111111");
-        authFacadeImpl.register(userDto);
+        authFacade.register(userDto);
         token = Objects.requireNonNull(authController.login(userDto).getBody()).getAccessToken();
     }
 
@@ -73,7 +73,7 @@ public class PositionControllerTest {
             Position position = new Position();
             position.setDescription("position" + i);
             position.setPosition("position" + i);
-            positionServiceImpl.addEntity(position);
+            positionService.addEntity(position);
         }
         Response response = given()
                 .port(port)
@@ -98,7 +98,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        UUID id = positionServiceImpl.addEntity(position).getId();
+        UUID id = positionService.addEntity(position).getId();
         Response response = given()
                 .port(port)
                 .auth()
@@ -125,7 +125,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        UUID id = positionServiceImpl.addEntity(position).getId();
+        UUID id = positionService.addEntity(position).getId();
         char oldChar = id.toString().charAt(1);
         char newChar = oldChar == 'a' ? 'b' : 'a';
         String invalidId = id.toString().replace(oldChar, newChar);
@@ -152,7 +152,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        positionServiceImpl.addEntity(position);
+        positionService.addEntity(position);
         String invalidId = "";
         given()
                 .port(port)
@@ -177,7 +177,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        positionServiceImpl.addEntity(position);
+        positionService.addEntity(position);
         String invalidId = "Bad uuid";
         given()
                 .port(port)
@@ -226,7 +226,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        positionServiceImpl.addEntity(position);
+        positionService.addEntity(position);
         PositionDto positionDto = new PositionDto();
         positionDto.setDescription("position");
         positionDto.setDescription("position");
@@ -270,7 +270,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        position = positionServiceImpl.addEntity(position);
+        position = positionService.addEntity(position);
         UUID id = position.getId();
         Response response = given()
                 .port(port)
@@ -297,7 +297,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        UUID id = positionServiceImpl.addEntity(position).getId();
+        UUID id = positionService.addEntity(position).getId();
         char oldChar = id.toString().charAt(1);
         char newChar = oldChar == 'a' ? 'b' : 'a';
         String invalidId = id.toString().replace(oldChar, newChar);
@@ -324,7 +324,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        positionServiceImpl.addEntity(position);
+        positionService.addEntity(position);
         String invalidId = "";
         given()
                 .port(port)
@@ -349,7 +349,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        positionServiceImpl.addEntity(position);
+        positionService.addEntity(position);
         String invalidId = "Bad uuid";
         given()
                 .port(port)
@@ -374,7 +374,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        position = positionServiceImpl.addEntity(position);
+        position = positionService.addEntity(position);
         PositionDto positionDto = new PositionDto();
         positionDto.setDescription(position.getDescription());
         positionDto.setId(position.getId());
@@ -402,7 +402,7 @@ public class PositionControllerTest {
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        positionServiceImpl.addEntity(position);
+        positionService.addEntity(position);
         PositionDto positionDto = new PositionDto();
         positionDto.setId(position.getId());
 

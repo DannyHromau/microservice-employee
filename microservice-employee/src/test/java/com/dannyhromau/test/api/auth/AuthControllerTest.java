@@ -5,7 +5,7 @@ import com.dannyhromau.employee.api.dto.TokenDto;
 import com.dannyhromau.employee.api.dto.UserDto;
 import com.dannyhromau.employee.controller.AuthController;
 import com.dannyhromau.employee.core.security.SecurityConfig;
-import com.dannyhromau.employee.facade.impl.AuthFacadeImpl;
+import com.dannyhromau.employee.facade.AuthFacade;
 import com.dannyhromau.employee.repository.PositionRepository;
 import com.dannyhromau.employee.repository.UserRepository;
 import io.restassured.http.ContentType;
@@ -35,7 +35,7 @@ public class AuthControllerTest {
     @Autowired
     private AuthController authController;
     @Autowired
-    private AuthFacadeImpl authFacadeImpl;
+    private AuthFacade authFacade;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -54,7 +54,7 @@ public class AuthControllerTest {
         userDto.setUsername("user");
         userDto.setEmail("user@user.com");
         userDto.setPassword("11111111");
-        authFacadeImpl.register(userDto);
+        authFacade.register(userDto);
     }
 
     @AfterEach

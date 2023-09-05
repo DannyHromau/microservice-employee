@@ -27,8 +27,7 @@ spring:
 password:
   length: 8
 
-host:
-  http://localhost:
+host: http://localhost:
 authMapping: /api/v1/auth
 positionMapping: /api/v1/position
 employeeMapping: /api/v1/employee

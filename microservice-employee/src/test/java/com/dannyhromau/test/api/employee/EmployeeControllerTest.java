@@ -5,14 +5,14 @@ import com.dannyhromau.employee.api.dto.EmployeeDto;
 import com.dannyhromau.employee.api.dto.PositionDto;
 import com.dannyhromau.employee.api.dto.UserDto;
 import com.dannyhromau.employee.controller.AuthController;
-import com.dannyhromau.employee.facade.impl.AuthFacadeImpl;
+import com.dannyhromau.employee.facade.AuthFacade;
 import com.dannyhromau.employee.model.Employee;
 import com.dannyhromau.employee.model.Position;
 import com.dannyhromau.employee.repository.EmployeeRepository;
 import com.dannyhromau.employee.repository.PositionRepository;
 import com.dannyhromau.employee.repository.UserRepository;
-import com.dannyhromau.employee.service.impl.EmployeeServiceImpl;
-import com.dannyhromau.employee.service.impl.PositionServiceImpl;
+import com.dannyhromau.employee.service.EmployeeService;
+import com.dannyhromau.employee.service.PositionService;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
@@ -41,17 +41,17 @@ public class EmployeeControllerTest {
     @Autowired
     private AuthController authController;
     @Autowired
-    private AuthFacadeImpl authFacadeImpl;
+    private AuthFacade authFacade;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private PositionRepository positionRepository;
     @Autowired
-    private PositionServiceImpl positionServiceImpl;
+    private PositionService positionService;
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
-    private EmployeeServiceImpl employeeServiceImpl;
+    private EmployeeService employeeService;
     private UUID positionId;
     @Value("${host}")
     private String host;
@@ -65,12 +65,12 @@ public class EmployeeControllerTest {
         userDto.setUsername("user");
         userDto.setEmail("user@user.com");
         userDto.setPassword("11111111");
-        authFacadeImpl.register(userDto);
+        authFacade.register(userDto);
         token = Objects.requireNonNull(authController.login(userDto).getBody()).getAccessToken();
         Position position = new Position();
         position.setPosition("position");
         position.setDescription("position");
-        positionId = positionServiceImpl.addEntity(position).getId();
+        positionId = positionService.addEntity(position).getId();
     }
 
     @AfterEach
@@ -92,7 +92,7 @@ public class EmployeeControllerTest {
             employee.setBirthDate(LocalDate.now());
             employee.setPhone("12345678" + i);
             employee.setFullTime(true);
-            employeeServiceImpl.addEntity(employee);
+            employeeService.addEntity(employee);
         }
         Response response = given()
                 .port(port)
@@ -122,7 +122,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        UUID id = employeeServiceImpl.addEntity(employee).getId();
+        UUID id = employeeService.addEntity(employee).getId();
         Response response = given()
                 .port(port)
                 .auth()
@@ -154,7 +154,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        UUID id = employeeServiceImpl.addEntity(employee).getId();
+        UUID id = employeeService.addEntity(employee).getId();
         char oldChar = id.toString().charAt(1);
         char newChar = oldChar == 'a' ? 'b' : 'a';
         String invalidId = id.toString().replace(oldChar, newChar);
@@ -186,7 +186,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        employeeServiceImpl.addEntity(employee);
+        employeeService.addEntity(employee);
         String invalidId = "";
         given()
                 .port(port)
@@ -216,7 +216,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        employeeServiceImpl.addEntity(employee);
+        employeeService.addEntity(employee);
         String invalidId = "Bad uuid";
         given()
                 .port(port)
@@ -274,7 +274,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        employeeServiceImpl.addEntity(employee);
+        employeeService.addEntity(employee);
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setFirstName("employee");
         employeeDto.setLastName("employee");
@@ -327,7 +327,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        UUID id = employeeServiceImpl.addEntity(employee).getId();
+        UUID id = employeeService.addEntity(employee).getId();
         Response response = given()
                 .port(port)
                 .auth()
@@ -358,7 +358,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        UUID id = employeeServiceImpl.addEntity(employee).getId();
+        UUID id = employeeService.addEntity(employee).getId();
         char oldChar = id.toString().charAt(1);
         char newChar = oldChar == 'a' ? 'b' : 'a';
         String invalidId = id.toString().replace(oldChar, newChar);
@@ -390,7 +390,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        employeeServiceImpl.addEntity(employee);
+        employeeService.addEntity(employee);
         String invalidId = "";
         given()
                 .port(port)
@@ -420,7 +420,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        employeeServiceImpl.addEntity(employee);
+        employeeService.addEntity(employee);
         String invalidId = "Bad uuid";
         given()
                 .port(port)
@@ -450,7 +450,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        employeeServiceImpl.addEntity(employee);
+        employeeService.addEntity(employee);
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setId(employee.getId());
         employeeDto.setFirstName("employee");
@@ -488,7 +488,7 @@ public class EmployeeControllerTest {
         employee.setBirthDate(LocalDate.now());
         employee.setPhone("12345678");
         employee.setFullTime(true);
-        employeeServiceImpl.addEntity(employee);
+        employeeService.addEntity(employee);
         EmployeeDto employeeDto = new EmployeeDto();
         employeeDto.setId(employee.getId());
 

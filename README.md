@@ -10,13 +10,14 @@ This IDE is recommended for excellent Maven integration, and very fast build tim
 
 # Tools
  * Java 17
- * Spring framework (boot, data, mvc, logging, test)
+ * Spring framework (boot, data, mvc, logging, test, security)
  * Maven
  * Lombok
  * PostgreSQL
  * Liquibase
  * Mapstruct
  * Swagger
+ * Rest-assured
 
 # Dependencies
 

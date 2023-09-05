@@ -12,19 +12,37 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.security.oauth2.jose.version>5.8.0</spring.security.oauth2.jose.version>
+        <spring.security.oauth2.server.version>3.1.0</spring.security.oauth2.server.version>
+        <spring.security.jwt.version>1.1.1.RELEASE</spring.security.jwt.version>
+        <mapstruct.processor.version>1.4.2.Final</mapstruct.processor.version>
+        <spring.boot.maven.plugin.version>2.7.0</spring.boot.maven.plugin.version>
+        <apache.maven.compiler.plugin.version>3.5.1</apache.maven.compiler.plugin.version>
+        <spring.boot.configuration.processor.version>3.0.4</spring.boot.configuration.processor.version>
+        <projectlombok.lombok.version>1.18.26</projectlombok.lombok.version>
+        <projectlombok.lombok.mapstruct.binding.version>0.2.0</projectlombok.lombok.mapstruct.binding.version>
+        <spring.boot.starter.log4j.version>3.0.1</spring.boot.starter.log4j.version>
+        <org.postgresql.version>42.5.4</org.postgresql.version>
+        <org.liquibase.version>4.22.0</org.liquibase.version>
+        <jakarta.xml.bind.version>4.0.0</jakarta.xml.bind.version>
+        <org.mapstruct.mapstruct.version>1.5.5.Final</org.mapstruct.mapstruct.version>
+        <io.swagger.annotations.version>2.1.12</io.swagger.annotations.version>
+        <springdoc.openapi.ui.version>1.6.3</springdoc.openapi.ui.version>
+        <io.rest-assured.version>5.3.0</io.rest-assured.version>
+
     </properties>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.0</version>
-
+                <version>${spring.boot.maven.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${apache.maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>17</source>
                     <target>17</target>
@@ -32,27 +50,27 @@
                         <path>
                             <groupId>org.mapstruct</groupId>
                             <artifactId>mapstruct-processor</artifactId>
-                            <version>1.4.2.Final</version>
+                            <version>${mapstruct.processor.version}</version>
                         </path>
                         <path>
                             <groupId>org.springframework.boot</groupId>
                             <artifactId>spring-boot-configuration-processor</artifactId>
-                            <version>3.0.4</version>
+                            <version>${spring.boot.configuration.processor.version}</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.24</version>
+                            <version>${projectlombok.lombok.version}</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok-mapstruct-binding</artifactId>
-                            <version>0.2.0</version>
+                            <version>${projectlombok.lombok.mapstruct.binding.version}</version>
                         </path>
                         <path>
                             <groupId>org.springframework.boot</groupId>
                             <artifactId>spring-boot-starter-log4j2</artifactId>
-                            <version>3.0.1</version>
+                            <version>${spring.boot.starter.log4j.version}</version>
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
@@ -61,7 +79,6 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
@@ -72,14 +89,12 @@
     </parent>
 
     <dependencies>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>${projectlombok.lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -90,76 +105,98 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
-
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.10</version>
+            <version>${org.postgresql.version}</version>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>4.22.0</version>
+            <version>${org.liquibase.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.9.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>4.10.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
-
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>2.3.2</version>
+            <version>${jakarta.xml.bind.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.5.5.Final</version>
+            <version>${org.mapstruct.mapstruct.version}</version>
         </dependency>
-
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>2.1.12</version>
+            <version>${io.swagger.annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.6.3</version>
+            <version>${springdoc.openapi.ui.version}</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+            <version>${spring.security.oauth2.jose.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+            <version>${spring.security.oauth2.server.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+            <version>${spring.security.jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${io.rest-assured.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.groovy</groupId>
+                    <artifactId>groovy-xml</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

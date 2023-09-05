@@ -1,10 +1,9 @@
 package com.dannyhromau.employee.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.dannyhromau.employee.core.base.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,33 +15,28 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @Table(name = "employee")
-public class Employee {
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "id", unique = true)
-    private UUID id;
-    @Column(name = "first_name", unique = true)
+public class Employee extends BaseEntity {
+
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "last_name", unique = true)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "position_id", unique = true)
+    @Column(name = "position_id", nullable = false)
     private UUID positionId;
-    @Column(name = "birth_date", unique = true)
+    @Column(name = "birth_date")
     private LocalDate birthDate;
     @Column(name = "phone", unique = true)
     private String phone;
-    @Column(name = "reg_date", unique = true)
+    @Column(name = "reg_date")
     private ZonedDateTime regDate;
-    @Column(name = "update_on", unique = true)
-    private ZonedDateTime updateOn;
-    @Column(name = "is_fired", unique = true)
+    @Column(name = "is_fired")
     private boolean isFired;
-    @Column(name = "fired_on", unique = true)
+    @Column(name = "fired_on")
     private ZonedDateTime firedOn;
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", insertable = false, updatable = false)
     private Position position;
+    @Column(name = "is_fulltime")
+    private boolean isFullTime;
 
 }

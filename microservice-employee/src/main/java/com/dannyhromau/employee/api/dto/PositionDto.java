@@ -1,17 +1,18 @@
 package com.dannyhromau.employee.api.dto;
 
+import com.dannyhromau.employee.core.base.BaseDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.ZonedDateTime;
-import java.util.UUID;
+import java.util.List;
 
 @Getter
 @Setter
-public class PositionDto {
-    private UUID id;
+public class PositionDto extends BaseDto {
+
     private String position;
     private String description;
-    private boolean fulltime;
-    private ZonedDateTime updateOn;
+    @JsonIgnore
+    private List<EmployeeDto> employeeDtoList;
 }

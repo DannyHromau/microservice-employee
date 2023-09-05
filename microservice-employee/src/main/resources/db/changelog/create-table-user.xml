@@ -6,25 +6,26 @@
 
     <!-- TABLES -->
 
-    <changeSet id="create-table-position" author="Daniil Hromau">
-        <createTable tableName="position">
+    <changeSet id="create-table-user" author="Daniil Hromau">
+        <createTable tableName="usr">
             <column name="id" type="uuid">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="position" type="varchar(100)">
+            <column name="username" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="varchar(100)">
+            </column>
+            <column name="password" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="description" type="varchar(600)">
+            <column name="blocked" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="grade" type="double">
+            <column name="created_on" type="timestamp with time zone">
                 <constraints nullable="false"/>
             </column>
-            <column name="fulltime" type="boolean">
-                <constraints nullable="false"/>
-            </column>
-            <column name="update_on" type="timestamp with time zone">
-                <constraints nullable="true"/>
+            <column name="updated_on" type="timestamp with time zone">
             </column>
         </createTable>
     </changeSet>

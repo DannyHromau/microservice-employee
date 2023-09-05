@@ -9,5 +9,5 @@ import java.util.UUID;
 public interface PositionRepository extends JpaRepository<Position, UUID> {
     Position findByPosition(String position);
 
-    Position findByUpdateOn(ZonedDateTime updateTime);
+    Position findByUpdatedOnAndId(ZonedDateTime updateTime, UUID id);
 }

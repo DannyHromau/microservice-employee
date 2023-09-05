@@ -7,5 +7,6 @@
 
     <include file="create-table-employee.xml" relativeToChangelogFile="true"/>
     <include file="create-table-position.xml" relativeToChangelogFile="true"/>
+    <include file="create-table-user.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

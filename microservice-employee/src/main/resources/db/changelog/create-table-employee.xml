@@ -26,7 +26,7 @@
             <column name="phone" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="reg_date" type="timestamp with time zone">
+            <column name="created_on" type="timestamp with time zone">
                 <constraints nullable="false"/>
             </column>
             <column name="update_on" type="timestamp with time zone">
@@ -37,6 +37,9 @@
             </column>
             <column name="fired_on" type="timestamp with time zone">
                 <constraints nullable="true"/>
+            </column>
+            <column name="is_fulltime" type="boolean">
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>

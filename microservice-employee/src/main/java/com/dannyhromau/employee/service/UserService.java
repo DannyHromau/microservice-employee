@@ -1,7 +1,7 @@
 package com.dannyhromau.employee.service;
 
 import com.dannyhromau.employee.core.base.BaseService;
-import com.dannyhromau.employee.model.Position;
+import com.dannyhromau.employee.model.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -9,19 +9,19 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public interface PositionService extends BaseService<Position> {
+public interface UserService extends BaseService<User> {
     @Override
-    List<Position> getEntities(Pageable pageable);
+    List<User> getEntities(Pageable pageable);
 
     @Override
-    Position getEntityById(UUID id);
+    User getEntityById(UUID id);
 
     @Override
-    Position addEntity(Position entity);
+    User addEntity(User entity);
 
     @Override
     UUID deleteEntity(UUID id);
 
     @Override
-    Position updateEntity(Position entity);
+    User updateEntity(User entity);
 }
